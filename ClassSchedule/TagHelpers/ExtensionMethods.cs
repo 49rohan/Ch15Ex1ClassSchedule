@@ -27,5 +27,7 @@ namespace ClassSchedule.TagHelpers
             output.BuildTag("a", className);
             output.Attributes.SetAttribute("href", url);
         }
+
+
     }
 }
