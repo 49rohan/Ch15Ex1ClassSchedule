@@ -1,0 +1,9 @@
+﻿@model IEnumerable<Day>
+
+<!-- Example: Render days as a dropdown -->
+<select class="form-control">
+    @foreach (var day in Model)
+    {
+        <option value="@day.DayId">@day.Name</option>
+    }
+</select>

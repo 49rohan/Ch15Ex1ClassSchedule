@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Day>
+
+@{
+    var currentRouteId = ViewContext.RouteData.Values["id"]?.ToString();
+    var daysList = Model?.ToList();
+    var hasDays = daysList?.Any() ?? false;
+}
+
+<select class="form-control">
+    @if (hasDays)
+    {
+        @foreach (var day in daysList)
+        {
+            <option value="@day.DayId" selected="@(currentRouteId == day.DayId.ToString())">
+                @day.Name
+            </option>
+        }
+    }
+    else
+    {
+        <option value="">No days available</option>
+    }
+</select>

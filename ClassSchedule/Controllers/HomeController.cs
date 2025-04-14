@@ -1,21 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ClassSchedule.Models;
+using Microsoft.Extensions.Options;
 
 namespace ClassSchedule.Controllers
 {
     public class HomeController : Controller
     {
-        private IClassScheduleUnitOfWork data { get; set; }
-        public HomeController(IClassScheduleUnitOfWork unit) => data = unit;
+        private IRepository<Class> classRepo;
 
-        public ViewResult Index(int id)
+        public HomeController(IRepository<Class> repo)
         {
-            // options for Days query
-            var dayOptions = new QueryOptions<Day> { 
-                OrderBy = d => d.DayId
-            };
-            ViewBag.Days = data.Days.List(dayOptions);
-
+            classRepo = repo;
+        }
+        public ViewResult Index(int id)
+        { 
             // options for Classes query
             var classOptions = new QueryOptions<Class> {
                 Includes = "Teacher, Day"
@@ -30,7 +28,7 @@ namespace ClassSchedule.Controllers
             }
 
             // execute queries
-            return View(data.Classes.List(classOptions));
+            return View(classRepo.List(classOptions));
         }
     }
 }

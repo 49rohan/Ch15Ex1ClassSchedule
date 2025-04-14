@@ -10,11 +10,7 @@
 <div class="text-center">
     <h1 class="display-4">Class Schedule</h1>
 
-    @foreach (Day d in ViewBag.Days)
-    {
-        <my-link-button action="Index" id="@d.DayId" class="mr-1 mb-2" 
-            is-active="@(id == d.DayId)">@d.Name</my-link-button>
-    }
+    <vc:day-filter current-day-id="@id"></vc:day-filter>
 </div>
 
 <a asp-action="Add" asp-controller="Class" class="ml-3">Add Class</a>
